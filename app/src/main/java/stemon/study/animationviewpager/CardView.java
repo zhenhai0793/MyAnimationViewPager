@@ -17,7 +17,7 @@ public class CardView extends LinearLayout  implements View.OnClickListener{
     private TextView mCheckBtn;//查看按钮
     private View mCardView;//卡片样式
 
-    private OnCheckListener mCheckListener;//点击事件监听
+    private OnPagerListener pagerListener;//点击事件监听
 
     public CardView(Context context){
         super(context);
@@ -52,21 +52,19 @@ public class CardView extends LinearLayout  implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        int id = view.getId();
-        if(R.id.check_btn == id){
-            if(mCheckListener != null){
-                mCheckListener.checkDetail();
+        if(R.id.check_btn == view.getId()){
+            if(pagerListener != null){
+                pagerListener.onPagerRemoved();
             }
         }
     }
 
-    public void setOnCheckListener(OnCheckListener checkListener){
-        this.mCheckListener = checkListener;
+    public void setOnPagerListener(OnPagerListener pagerListener){
+        this.pagerListener = pagerListener;
     }
 
-    public interface OnCheckListener{
-        public void checkDetail();
+    public interface OnPagerListener {
+        void onPagerRemoved();
     }
-
 
 }
